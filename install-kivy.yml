@@ -1,0 +1,23 @@
+---
+# tasks file for ansible-role-kivy
+# this worked: https://kivy.org/docs/installation/installation-osx.html
+
+- name: install p7zip
+  homebrew: name=p7zip state=present
+
+- name: download kivy 
+  get_url:
+    url: https://kivy.org/downloads/1.9.1/Kivy-1.9.1-osx-python2.7z
+    dest: /tmp/Kivy-1.9.1-osx-python2.7z
+    mode: 0755
+
+#  ls /Applications/Kivy.app/Contents/Resources/venv/bin
+
+# https://www.bountysource.com/issues/38008886-issue-installing-kivy-1-9-1-using-brew
+# - file: 
+#   src: /Applications/Kivy.app/Contents/Resources/script 
+#   dest: /usr/local/bin/kivy 
+#   state: link
+
+
+
