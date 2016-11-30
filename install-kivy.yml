@@ -26,4 +26,16 @@
     args:
       chdir: /tmp
       creates: /tmp/Kivy2.app
+    when: ansible_distribution == 'MacOSX'
  
+  - name: rsync Kivy2.app into /Applications
+    synchronize: src=/tmp/Kivy2.app dest=/Applications
+    when: ansible_distribution == 'MacOSX'
+
+  - name: create symlink to kivy
+    file: 
+      src: /Applications/Kivy2.app/Contents/Resources/script 
+      dest: /usr/local/bin/kivy
+      state: link
+    when: ansible_distribution == 'MacOSX'
+      
