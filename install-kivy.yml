@@ -6,7 +6,8 @@
   become: false
 
   vars: 
-    kivy_7zip: Kivy-1.9.1-osx-python2.7z
+    kivy_version: 1.9.1
+    kivy_7zip: Kivy-{{ kivy_version }}-osx-python2.7z
 
   tasks:
 
@@ -16,8 +17,8 @@
 
   - name: download kivy 
     get_url:
-      url: https://kivy.org/downloads/1.9.1/{{ kivy_7zip }}
-      dest: /tmp/Kivy-1.9.1-osx-python2.7z
+      url: https://kivy.org/downloads/{{ kivy_version }}/{{ kivy_7zip }}
+      dest: /tmp/Kivy-{{ kivy_version }}-osx-python2.7z
       mode: 0755
     when: ansible_distribution == 'MacOSX'
 
