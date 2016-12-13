@@ -1,0 +1,27 @@
+---
+
+- name: install p7zip
+  homebrew: name=p7zip state=present
+
+- name: download kivy 
+  get_url:
+    url: https://kivy.org/downloads/{{ kivy_version }}/{{ kivy_7zip }}
+    dest: /tmp/Kivy-{{ kivy_version }}-osx-python2.7z
+    mode: 0755
+
+- name: extracting 7zip
+  shell: 7z x {{ kivy_7zip }}
+  args:
+    chdir: /tmp
+    creates: /tmp/Kivy2.app
+
+- name: rsync Kivy2.app into /Applications
+  synchronize: src=/tmp/Kivy2.app dest=/Applications
+
+- name: create symlink to kivy
+  file: 
+    src: /Applications/Kivy2.app/Contents/Resources/script 
+    dest: /usr/local/bin/kivy
+    state: link
+
+      
