@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  user: remote
+  become: false
+
+  vars: 
+
+  tasks:
+
+    - cron:
+        name: "check dirs"
+        minute: "0"
+        hour: "5,2"
+        job: "ls -alh > /dev/null"
